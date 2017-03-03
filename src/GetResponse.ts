@@ -12,7 +12,7 @@ export interface customField {
 }
 
 export interface addContactOptions {
-    name: string
+    name?: string
     email: string
     token: string
     dayOfCycle?: number
@@ -46,7 +46,6 @@ export class GetResponse {
     }
 
     addContact(data: addContactOptions): Promise<boolean> {
-
         let req: any = {
             name: data.name,
             email: data.email,

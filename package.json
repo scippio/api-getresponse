@@ -1,6 +1,6 @@
 {
     "name": "api-getresponse",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "Unofficial API GetResponse",
     "keywords": [
         "Get Response","API","Typescript"

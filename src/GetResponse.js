@@ -37,8 +37,7 @@ class GetResponse {
             path: "/contacts",
             data: req
         }).then(response => {
-            console.log(response);
-            return false;
+            return (response.res.statusCode === 202);
         });
     }
     call(callData) {

@@ -8,7 +8,7 @@ export interface customField {
     value: Array<string | number | boolean>;
 }
 export interface addContactOptions {
-    name: string;
+    name?: string;
     email: string;
     token: string;
     dayOfCycle?: number;
