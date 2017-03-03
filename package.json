@@ -1,0 +1,33 @@
+{
+    "name": "api-getresponse",
+    "version": "0.0.8",
+    "description": "Unofficial API GetResponse",
+    "keywords": [
+        "Get Response","API","Typescript"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:scippio/api-getresponse.git"
+    },
+    "license": "GPL-3.0",
+    "author": "scippio",
+    "main": "./src/index",
+    "types": "./types/index.d.ts",
+    "scripts": {
+        "build": "gulp"
+    },
+    "dependencies": {
+        "bluebird": "^3.4.6",
+        "restify": "^4.3.0",
+        "aweber-api-nodejs": "^0.0.2"
+    },
+    "devDependencies": {
+        "@types/bluebird": "3.0.37",
+        "@types/node": "7.0.5",
+        "@types/restify": "2.0.41",
+        "gulp": "^3.9.1",
+        "gulp-typescript": "^3.1.5",
+        "typescript": "^2.2.1",
+        "merge2": "^1.0.2"
+    }
+}
