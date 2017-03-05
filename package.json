@@ -1,7 +1,7 @@
 {
     "name": "api-getresponse",
-    "version": "0.0.9",
-    "description": "Unofficial API GetResponse",
+    "version": "0.1.0",
+    "description": "Unofficial high-level lib for API GetResponse",
     "keywords": [
         "Get Response","API","Typescript"
     ],
@@ -14,20 +14,36 @@
     "main": "./src/index",
     "types": "./types/index.d.ts",
     "scripts": {
-        "build": "gulp"
+        "build": "gulp",
+        "doc": "gulp doc",
+        "test": "gulp test"
     },
     "dependencies": {
         "bluebird": "^3.4.6",
         "restify": "^4.3.0",
-        "aweber-api-nodejs": "^0.0.2"
+        "qs": "^6.3.0"
     },
     "devDependencies": {
         "@types/bluebird": "3.0.37",
         "@types/node": "7.0.5",
         "@types/restify": "2.0.41",
+        "@types/qs": "6.2.30",
+        "@types/gulp-typedoc": "0.0.29",
+        "@types/mocha": "2.2.39",
+        "@types/istanbul": "0.4.29",
+        "@types/should": "8.1.30",
         "gulp": "^3.9.1",
         "gulp-typescript": "^3.1.5",
         "typescript": "^2.2.1",
-        "merge2": "^1.0.2"
+        "merge2": "^1.0.2",
+        "typedoc": "^0.5.7",
+        "gulp-typedoc": "^2.0.2",
+        "typedoc-md-theme": "^1.0.1",
+        "gulp-clean": "^0.3.2",
+        "mocha": "^3.2.0",
+        "istanbul": "^0.4.5",
+        "should": "^11.2.0",
+        "gulp-istanbul": "1.1.1",
+        "gulp-mocha": "3.0.1"
     }
 }

@@ -1,1 +1,1 @@
-export * from "./GetResponse";
+export * from "./api/GetResponse";
