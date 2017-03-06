@@ -16,15 +16,16 @@ class GetResponse {
     }
     addContact(data) {
         let req = {
-            name: data.name,
             email: data.email,
-            dayOfCycle: data.dayOfCycle || 0,
-            campaign: {
-                campaignId: data.token
-            },
-            ipAddress: data.ip
+            dayOfCycle: data.dayOfCycle || 0
         };
-        if (data.customFields) {
+        if (!this.isEmpty(data.name))
+            req.name = data.name;
+        if (!this.isEmpty(data.token))
+            req.campaign = { campaignId: data.token };
+        if (!this.isEmpty(data.ip))
+            req.ipAddress = data.ip;
+        if (!this.isEmpty(data.customFields)) {
             req.customFieldValues = [];
             data.customFields.forEach(field => {
                 req.customFieldValues.push({
@@ -61,20 +62,20 @@ class GetResponse {
         });
     }
     updateContact(contactId, data) {
-        let req = {
-            name: data.name
-        };
-        if (data.note)
+        let req = {};
+        if (!this.isEmpty(data.name))
+            req.name = data.name;
+        if (!this.isEmpty(data.note))
             req.note = data.note;
-        if (data.dayOfCycle)
+        if (!this.isEmpty(data.dayOfCycle))
             req.dayOfCycle = data.dayOfCycle;
-        if (data.token)
+        if (!this.isEmpty(data.token))
             req.compaign = { campaignId: data.token };
-        if (data.scoring)
+        if (!this.isEmpty(data.scoring))
             req.scoring = data.scoring;
-        if (data.tags)
+        if (!this.isEmpty(data.tags))
             req.tags = data.tags;
-        if (data.customFields) {
+        if (!this.isEmpty(data.customFields)) {
             req.customFieldValues = [];
             data.customFields.forEach(field => {
                 req.customFieldValues.push({
@@ -98,6 +99,11 @@ class GetResponse {
         }).then(response => {
             return (response.res.statusCode === 204);
         });
+    }
+    isEmpty(data) {
+        if (data === undefined || data === null || data === "")
+            return true;
+        return false;
     }
     call(callData) {
         let client = Restify.createJsonClient({

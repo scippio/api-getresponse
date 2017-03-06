@@ -62,5 +62,6 @@ export declare class GetResponse {
     findContactByEmail(email: string): Promise<Contact | null>;
     updateContact(contactId: string, data: updateContactOptions): Promise<Contact>;
     deleteContact(contactId: string): Promise<boolean>;
+    private isEmpty(data);
     private call(callData);
 }

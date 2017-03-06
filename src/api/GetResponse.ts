@@ -78,17 +78,15 @@ export class GetResponse {
 
     addContact(data: addContactOptions): Promise<boolean> {
         let req: any = {
-            name: data.name,
             email: data.email,
-            dayOfCycle: data.dayOfCycle || 0,
-            campaign: {
-                campaignId: data.token
-            },
-            ipAddress: data.ip
+            dayOfCycle: data.dayOfCycle || 0
         }
-        if(data.customFields){
+        if(!this.isEmpty(data.name)) req.name = data.name
+        if(!this.isEmpty(data.token)) req.campaign = { campaignId: data.token }
+        if(!this.isEmpty(data.ip)) req.ipAddress = data.ip
+        if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
-            data.customFields.forEach(field => {
+            data.customFields!.forEach(field => {
                 req.customFieldValues.push({
                     customFieldId: field.id,
                     value: field.value
@@ -126,16 +124,16 @@ export class GetResponse {
 
     updateContact(contactId: string, data: updateContactOptions): Promise<Contact> {
         let req: any = {
-            name: data.name
         }
-        if(data.note) req.note = data.note
-        if(data.dayOfCycle) req.dayOfCycle = data.dayOfCycle
-        if(data.token) req.compaign = { campaignId: data.token }
-        if(data.scoring) req.scoring = data.scoring
-        if(data.tags) req.tags = data.tags
-        if(data.customFields){
+        if(!this.isEmpty(data.name)) req.name = data.name
+        if(!this.isEmpty(data.note)) req.note = data.note
+        if(!this.isEmpty(data.dayOfCycle)) req.dayOfCycle = data.dayOfCycle
+        if(!this.isEmpty(data.token)) req.compaign = { campaignId: data.token }
+        if(!this.isEmpty(data.scoring)) req.scoring = data.scoring
+        if(!this.isEmpty(data.tags)) req.tags = data.tags
+        if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
-            data.customFields.forEach(field => {
+            data.customFields!.forEach(field => {
                 req.customFieldValues.push({
                     customFieldId: field.id,
                     value: field.value
@@ -159,6 +157,11 @@ export class GetResponse {
         }).then(response => {
             return (response.res.statusCode === 204)
         })
+    }
+
+    private isEmpty(data: any): boolean {
+        if(data === undefined || data === null || data === "") return true
+        return false
     }
 
     private call(callData: callOptions): Promise<any> {
