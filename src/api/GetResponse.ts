@@ -87,7 +87,7 @@ export class GetResponse {
         if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
             data.customFields!.forEach(field => {
-                if(!this.isEmpty(field.value)){
+                if(!this.isEmpty(field.id) && !this.isEmpty(field.value)){
                     req.customFieldValues.push({
                         customFieldId: field.id,
                         value: field.value
@@ -138,7 +138,7 @@ export class GetResponse {
         if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
             data.customFields!.forEach(field => {
-                if(!this.isEmpty(field.value)){
+                if(!this.isEmpty(field.id) && !this.isEmpty(field.value)){
                     req.customFieldValues.push({
                         customFieldId: field.id,
                         value: field.value
