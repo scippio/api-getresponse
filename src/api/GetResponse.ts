@@ -87,10 +87,12 @@ export class GetResponse {
         if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
             data.customFields!.forEach(field => {
-                req.customFieldValues.push({
-                    customFieldId: field.id,
-                    value: field.value
-                })
+                if(!this.isEmpty(field.value)){
+                    req.customFieldValues.push({
+                        customFieldId: field.id,
+                        value: field.value
+                    })
+                }
             })
         }
 
@@ -101,7 +103,10 @@ export class GetResponse {
         }).then(response => {
             return (response.res.statusCode === 202)
         }).catch(err => {
-            if(err.res.statusCode === 409) return false
+            if(
+                err.res.statusCode === 409 ||
+                (err.res.statusCode === 400 && err.obj.message === "Cannot add contact that is blacklisted")
+            ) return false
             throw err
         })
     }
@@ -123,8 +128,7 @@ export class GetResponse {
     }
 
     updateContact(contactId: string, data: updateContactOptions): Promise<Contact> {
-        let req: any = {
-        }
+        let req: any = {}
         if(!this.isEmpty(data.name)) req.name = data.name
         if(!this.isEmpty(data.note)) req.note = data.note
         if(!this.isEmpty(data.dayOfCycle)) req.dayOfCycle = data.dayOfCycle
@@ -134,10 +138,12 @@ export class GetResponse {
         if(!this.isEmpty(data.customFields)){
             req.customFieldValues = []
             data.customFields!.forEach(field => {
-                req.customFieldValues.push({
-                    customFieldId: field.id,
-                    value: field.value
-                })
+                if(!this.isEmpty(field.value)){
+                    req.customFieldValues.push({
+                        customFieldId: field.id,
+                        value: field.value
+                    })
+                }
             })
         }
 
@@ -160,6 +166,13 @@ export class GetResponse {
     }
 
     private isEmpty(data: any): boolean {
+        if(Array.isArray(data)){
+            let e = true
+            data.forEach((d) => {
+                if(!this.isEmpty(d)) e = false
+            })
+            return e
+        }
         if(data === undefined || data === null || data === "") return true
         return false
     }

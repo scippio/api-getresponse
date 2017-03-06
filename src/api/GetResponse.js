@@ -28,10 +28,12 @@ class GetResponse {
         if (!this.isEmpty(data.customFields)) {
             req.customFieldValues = [];
             data.customFields.forEach(field => {
-                req.customFieldValues.push({
-                    customFieldId: field.id,
-                    value: field.value
-                });
+                if (!this.isEmpty(field.value)) {
+                    req.customFieldValues.push({
+                        customFieldId: field.id,
+                        value: field.value
+                    });
+                }
             });
         }
         return this.call({
@@ -41,7 +43,8 @@ class GetResponse {
         }).then(response => {
             return (response.res.statusCode === 202);
         }).catch(err => {
-            if (err.res.statusCode === 409)
+            if (err.res.statusCode === 409 ||
+                (err.res.statusCode === 400 && err.obj.message === "Cannot add contact that is blacklisted"))
                 return false;
             throw err;
         });
@@ -78,10 +81,12 @@ class GetResponse {
         if (!this.isEmpty(data.customFields)) {
             req.customFieldValues = [];
             data.customFields.forEach(field => {
-                req.customFieldValues.push({
-                    customFieldId: field.id,
-                    value: field.value
-                });
+                if (!this.isEmpty(field.value)) {
+                    req.customFieldValues.push({
+                        customFieldId: field.id,
+                        value: field.value
+                    });
+                }
             });
         }
         return this.call({
@@ -101,6 +106,14 @@ class GetResponse {
         });
     }
     isEmpty(data) {
+        if (Array.isArray(data)) {
+            let e = true;
+            data.forEach((d) => {
+                if (!this.isEmpty(d))
+                    e = false;
+            });
+            return e;
+        }
         if (data === undefined || data === null || data === "")
             return true;
         return false;

@@ -1,4 +1,4 @@
 # External module "api/GetResponse"
 ## Index### Classes* [GetResponse](../classes/_api_getresponse_.getresponse.md)### Interfaces* [Contact](../interfaces/_api_getresponse_.contact.md)* [GetResponseConfig](../interfaces/_api_getresponse_.getresponseconfig.md)* [addContactOptions](../interfaces/_api_getresponse_.addcontactoptions.md)* [callOptions](../interfaces/_api_getresponse_.calloptions.md)* [customField](../interfaces/_api_getresponse_.customfield.md)* [updateContactOptions](../interfaces/_api_getresponse_.updatecontactoptions.md)### Type aliases* [Method](_api_getresponse_.md#method)## Type aliases### Method: "GET" | "POST" | "DELETE"
-* Defined in api/GetResponse.ts:60
+* Defined in [api/GetResponse.ts:60](https://github.com/scippio/api-getresponse/blob/a0f8754/src/api/GetResponse.ts#L60)
 Generated using [TypeDoc](http://typedoc.io)
