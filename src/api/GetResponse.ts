@@ -102,13 +102,16 @@ export class GetResponse {
             data: req
         }).then(response => {
             return (response.res.statusCode === 202)
-        }).catch(err => {
+        }) //.catch(err => {
+            /*
             if(
                 err.res.statusCode === 409 ||
-                (err.res.statusCode === 400 && err.obj.message === "Cannot add contact that is blacklisted")
-            ) return false
-            throw err
-        })
+                (err.res.statusCode === 400 && err.obj.message === "Cannot add contact that is blacklisted") ||
+                (err.res.statusCode === 400 && err.obj.message === "Email domain not exists")
+            ) return false*/
+
+            // throw err
+        // })
     }
 
     findContactByEmail(email: string): Promise<Contact | null> {

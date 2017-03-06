@@ -105,7 +105,11 @@ describe("API tests", () => {
                 value: ["US"]
             }]
         }).then(response => {
-            Should(response).be.exactly(false)
+            throw new Error("Duplicate Contact")
+        }).catch((err) => {
+            Should(err).has.property("res")
+            Should(err.res).has.property("statusCode")
+            Should(err.res.statusCode).be.exactly(409)
         })
     })
 
